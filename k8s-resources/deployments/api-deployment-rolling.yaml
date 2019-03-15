@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-depl
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api-h2
+        image: shekhargulati/k8s-workshop-api:h2
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "300m"
+        ports:
+        - containerPort: 8080

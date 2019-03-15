@@ -1,0 +1,14 @@
+FROM openjdk:8-alpine
+
+ENV SPRING_DATASOURCE_URL jdbc:mysql://mysql:3306/conduit
+ENV SPRING_DATASOURCE_USERNAME root
+ENV SPRING_DATASOURCE_PASSWORD password
+
+WORKDIR /app
+
+COPY build/libs/api-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java"]
+CMD ["-jar","app.jar"]

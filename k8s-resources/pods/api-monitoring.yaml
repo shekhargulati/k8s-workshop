@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-monitoring
+  labels:
+    app: api
+    version: monitoring
+spec:
+  containers:
+  - name: api-monitoring
+    image: shekhargulati/k8s-workshop-api:monitoring
+    imagePullPolicy: Always
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /isAlive
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 5  
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 40  
+      

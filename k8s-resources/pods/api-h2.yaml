@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-h2
+  labels:
+    app: api
+    version: h2
+spec:
+  containers:
+  - name: api-h2
+    image: shekhargulati/k8s-workshop-api:h2
+    imagePullPolicy: Always
+    args:
+      - "-jar"
+      - "app.jar"
+      - "--spring.application.name=Medium"
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
